@@ -1,0 +1,5 @@
+CCZ05,Cola-Cola Zero 0.5l,10,6
+SPR33,Sprite 0.33l,5,5.5
+FNT05,Fanta 0.5l,25,5
+WTR10,Water 1l,36,4.5
+RDB33,Red Bull 0.33l,10,7.5

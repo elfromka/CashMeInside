@@ -191,6 +191,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CashMeIn - Tables";
+            this.Load += new System.EventHandler(this.Tables_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tableOne)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabelTwo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tableThree)).EndInit();

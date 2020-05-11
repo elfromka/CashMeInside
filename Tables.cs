@@ -24,6 +24,15 @@ namespace CashMeInside
                 this.usernameLabel.Text = value;
             }
         }
+
+        private void Tables_Load(object sender, EventArgs e)
+        {
+            if (usernameLabelText != "admin")
+            {
+                stockButton.Enabled = false;
+            }
+        }
+
         public Tables()
         {
             InitializeComponent();
