@@ -36,6 +36,7 @@ namespace CashMeInside
             CategoryList.Add("food");
             productCategoryCB.DataSource = CategoryList;
             productCategoryCB.SelectedIndex = 0;
+            productCategoryCB.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void addProductButton_Click(object sender, EventArgs e)
@@ -56,6 +57,8 @@ namespace CashMeInside
 
             if (productCategory == "drink")
             {
+                generateProductCode(productCategory);
+
                 drinkProductsFromStock.Add(newProduct);
                 File.WriteAllLines(drinkStockFilePath, drinkProductsFromStock);
                 drinkListBox.DataSource = null;
@@ -64,6 +67,8 @@ namespace CashMeInside
             }
             else if (productCategory == "food")
             {
+                generateProductCode(productCategory);
+
                 foodProductsFromStock.Add(newProduct);
                 File.WriteAllLines(foodStockFilePath, foodProductsFromStock);
                 foodListBox.DataSource = null;
@@ -87,6 +92,65 @@ namespace CashMeInside
             productQuantityInput.Text = "";
             productPriceInput.Text = "";
             productCodeInput.Text = "";
+        }
+
+        private void generateProductCode(string productCategory)
+        {
+            string letterProductCode = (productCategory.Substring(0, 1)).ToUpper();
+            List<string> productCodes = new List<string>();
+
+            if (productCategory == "drink")
+            {
+                List<string> drinkProductsFromStock = File.ReadAllLines(drinkStockFilePath).ToList();
+
+                foreach (var drinkProd in drinkProductsFromStock)
+                {
+                    string extractExistingProductCode;
+                    int charLocation = drinkProd.IndexOf(",", StringComparison.Ordinal);
+
+                    if (charLocation > 0)
+                    {
+                        extractExistingProductCode = drinkProd.Substring(0, charLocation);
+                        productCodes.Add(extractExistingProductCode);
+                    }
+                }
+            }
+            else
+            { 
+                List<string> foodProductsFromStock = File.ReadAllLines(foodStockFilePath).ToList();
+            }
+
+            foreach (var productCode in productCodes)
+            {
+                //int val;
+
+                //for (int i = 0; i < a.Length; i++)
+                //{
+                //    if (Char.IsDigit(a[i]))
+                //        b += a[i];
+                //}
+
+                //if (b.Length > 0)
+                //    val = int.Parse(b);
+            }
+        }
+
+        private void removeProductButton_Click(object sender, EventArgs e)
+        {
+            List<string> drinkProductsFromStock = File.ReadAllLines(drinkStockFilePath).ToList();
+            List<string> foodProductsFromStock = File.ReadAllLines(foodStockFilePath).ToList();
+
+            bool contains = false;
+
+            foreach (var foodProd in foodProductsFromStock)
+            {
+                contains = foodProd.Split(',').Contains("F1");
+            }
+
+            //string result = foodProductsFromStock.Find(item => item == "F1");
+            //MessageBox.Show(i);
+
+            //listString.Split(',').Contains("apple")
         }
     }
 }

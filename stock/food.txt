@@ -1,5 +1,5 @@
-PIZZA,Pizza,2,12
-HMBRG,Hamburger,5,12
-FRIES,Fries,5,6
-TBONE,T-bone,2,25
-FHCHS,Fish & Chips,2,5
+F1,Pizza,2,12
+F2,Hamburger,5,12
+F3,Fries,5,6
+F4,T-bone,2,25
+F5,Fish & Chips,2,5
