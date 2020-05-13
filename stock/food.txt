@@ -2,4 +2,3 @@ F1,Pizza,2,12
 F2,Hamburger,5,12
 F3,Fries,5,6
 F4,T-bone,2,25
-F5,Fish & Chips,2,5

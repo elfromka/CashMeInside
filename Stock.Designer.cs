@@ -41,8 +41,6 @@
             this.drinkListBox = new System.Windows.Forms.ListBox();
             this.foodListLabel = new System.Windows.Forms.Label();
             this.drinkListLabel = new System.Windows.Forms.Label();
-            this.productCodeInput = new System.Windows.Forms.TextBox();
-            this.productCodeLabel = new System.Windows.Forms.Label();
             this.removeProductLabel = new System.Windows.Forms.Label();
             this.productCodesCB = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -57,14 +55,14 @@
             this.productNameInput.Font = new System.Drawing.Font("Raleway", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.productNameInput.Location = new System.Drawing.Point(24, 373);
             this.productNameInput.Name = "productNameInput";
-            this.productNameInput.Size = new System.Drawing.Size(140, 23);
+            this.productNameInput.Size = new System.Drawing.Size(225, 23);
             this.productNameInput.TabIndex = 7;
             // 
             // productCategoryCB
             // 
             this.productCategoryCB.Font = new System.Drawing.Font("Raleway", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.productCategoryCB.FormattingEnabled = true;
-            this.productCategoryCB.Location = new System.Drawing.Point(531, 373);
+            this.productCategoryCB.Location = new System.Drawing.Point(485, 373);
             this.productCategoryCB.Name = "productCategoryCB";
             this.productCategoryCB.Size = new System.Drawing.Size(150, 23);
             this.productCategoryCB.TabIndex = 15;
@@ -72,7 +70,7 @@
             // addProductButton
             // 
             this.addProductButton.Font = new System.Drawing.Font("Raleway", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addProductButton.Location = new System.Drawing.Point(696, 366);
+            this.addProductButton.Location = new System.Drawing.Point(650, 366);
             this.addProductButton.Name = "addProductButton";
             this.addProductButton.Size = new System.Drawing.Size(95, 34);
             this.addProductButton.TabIndex = 16;
@@ -104,7 +102,7 @@
             // 
             this.productQuantityLabel.AutoSize = true;
             this.productQuantityLabel.Font = new System.Drawing.Font("Raleway", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productQuantityLabel.Location = new System.Drawing.Point(313, 351);
+            this.productQuantityLabel.Location = new System.Drawing.Point(264, 351);
             this.productQuantityLabel.Name = "productQuantityLabel";
             this.productQuantityLabel.Size = new System.Drawing.Size(71, 19);
             this.productQuantityLabel.TabIndex = 10;
@@ -113,7 +111,7 @@
             // productQuantityInput
             // 
             this.productQuantityInput.Font = new System.Drawing.Font("Raleway", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productQuantityInput.Location = new System.Drawing.Point(317, 373);
+            this.productQuantityInput.Location = new System.Drawing.Point(268, 373);
             this.productQuantityInput.Name = "productQuantityInput";
             this.productQuantityInput.Size = new System.Drawing.Size(67, 23);
             this.productQuantityInput.TabIndex = 11;
@@ -122,7 +120,7 @@
             // 
             this.productPriceLabel.AutoSize = true;
             this.productPriceLabel.Font = new System.Drawing.Font("Raleway", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productPriceLabel.Location = new System.Drawing.Point(399, 351);
+            this.productPriceLabel.Location = new System.Drawing.Point(349, 351);
             this.productPriceLabel.Name = "productPriceLabel";
             this.productPriceLabel.Size = new System.Drawing.Size(46, 19);
             this.productPriceLabel.TabIndex = 12;
@@ -131,16 +129,16 @@
             // productPriceInput
             // 
             this.productPriceInput.Font = new System.Drawing.Font("Raleway", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productPriceInput.Location = new System.Drawing.Point(403, 373);
+            this.productPriceInput.Location = new System.Drawing.Point(353, 373);
             this.productPriceInput.Name = "productPriceInput";
-            this.productPriceInput.Size = new System.Drawing.Size(109, 23);
+            this.productPriceInput.Size = new System.Drawing.Size(116, 23);
             this.productPriceInput.TabIndex = 13;
             // 
             // productCategoryLabel
             // 
             this.productCategoryLabel.AutoSize = true;
             this.productCategoryLabel.Font = new System.Drawing.Font("Raleway", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productCategoryLabel.Location = new System.Drawing.Point(527, 351);
+            this.productCategoryLabel.Location = new System.Drawing.Point(481, 351);
             this.productCategoryLabel.Name = "productCategoryLabel";
             this.productCategoryLabel.Size = new System.Drawing.Size(140, 19);
             this.productCategoryLabel.TabIndex = 14;
@@ -175,24 +173,6 @@
             this.drinkListLabel.Size = new System.Drawing.Size(70, 19);
             this.drinkListLabel.TabIndex = 3;
             this.drinkListLabel.Text = "Drink list";
-            // 
-            // productCodeInput
-            // 
-            this.productCodeInput.Font = new System.Drawing.Font("Raleway", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productCodeInput.Location = new System.Drawing.Point(177, 373);
-            this.productCodeInput.Name = "productCodeInput";
-            this.productCodeInput.Size = new System.Drawing.Size(123, 23);
-            this.productCodeInput.TabIndex = 9;
-            // 
-            // productCodeLabel
-            // 
-            this.productCodeLabel.AutoSize = true;
-            this.productCodeLabel.Font = new System.Drawing.Font("Raleway", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productCodeLabel.Location = new System.Drawing.Point(173, 351);
-            this.productCodeLabel.Name = "productCodeLabel";
-            this.productCodeLabel.Size = new System.Drawing.Size(111, 19);
-            this.productCodeLabel.TabIndex = 8;
-            this.productCodeLabel.Text = "Product code";
             // 
             // removeProductLabel
             // 
@@ -276,8 +256,6 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.removeProductLabel);
             this.Controls.Add(this.productCodesCB);
-            this.Controls.Add(this.productCodeLabel);
-            this.Controls.Add(this.productCodeInput);
             this.Controls.Add(this.drinkListLabel);
             this.Controls.Add(this.foodListLabel);
             this.Controls.Add(this.drinkListBox);
@@ -318,8 +296,6 @@
         private System.Windows.Forms.ListBox drinkListBox;
         private System.Windows.Forms.Label foodListLabel;
         private System.Windows.Forms.Label drinkListLabel;
-        private System.Windows.Forms.TextBox productCodeInput;
-        private System.Windows.Forms.Label productCodeLabel;
         private System.Windows.Forms.Label removeProductLabel;
         private System.Windows.Forms.ComboBox productCodesCB;
         private System.Windows.Forms.TextBox textBox1;

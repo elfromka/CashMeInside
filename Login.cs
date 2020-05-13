@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CashMeInside
@@ -38,13 +31,13 @@ namespace CashMeInside
             }
             else
             {
-                MessageBox.Show("The entered username or password is incorrect.");
+                MessageBox.Show("The entered username or password is incorrect.", "Something is wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void forgotPasswordLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MessageBox.Show("Well, that's not good... I feel sorry for you.");
+            MessageBox.Show("Well, that's not good... I feel sorry for you.", "You really forgot your password?", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

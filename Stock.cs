@@ -21,9 +21,37 @@ namespace CashMeInside
         {
             bindCategoryList();
 
-            // list of string           //helper method ToList => convert the array of string to a list
             List<string> drinkProductsFromStock = File.ReadAllLines(drinkStockFilePath).ToList();
             List<string> foodProductsFromStock = File.ReadAllLines(foodStockFilePath).ToList();
+
+            List<string> existingDrinkProductCodes = new List<string>();
+            List<string> existingFoodProductCodes = new List<string>();
+
+            foreach (var drinkProd in drinkProductsFromStock)
+            {
+                int charLocation = drinkProd.IndexOf(",", StringComparison.Ordinal);
+
+                if (charLocation > 0)
+                {
+                    existingDrinkProductCodes.Add(drinkProd.Substring(0, charLocation));
+                }
+            }
+
+            foreach (var foodProd in foodProductsFromStock)
+            {
+                int charLocation = foodProd.IndexOf(",", StringComparison.Ordinal);
+
+                if (charLocation > 0)
+                {
+                    existingFoodProductCodes.Add(foodProd.Substring(0, charLocation));
+                }
+            }
+
+            var newList = existingDrinkProductCodes.Concat(existingFoodProductCodes).ToList();
+
+            productCodesCB.DataSource = newList;
+            productCodesCB.SelectedIndex = 0;
+            productCodesCB.DropDownStyle = ComboBoxStyle.DropDownList;
 
             drinkListBox.DataSource = drinkProductsFromStock;
             foodListBox.DataSource = foodProductsFromStock;
@@ -45,10 +73,8 @@ namespace CashMeInside
             int productQuantity = Convert.ToInt32(productQuantityInput.Text);
             double productPrice = Convert.ToDouble(productPriceInput.Text);
             string productCategory = productCategoryCB.Text;
-            productCodeInput.MaxLength = 5;
-            string productCode = productCodeInput.Text;
-
-            string newProduct = String.Format("{0},{1},{2},{3}", productCode, productName, productQuantity, productPrice);
+            string productCode;
+            string newProduct;
 
             List<string> drinkProductsFromStock = File.ReadAllLines(drinkStockFilePath).ToList();
             List<string> foodProductsFromStock = File.ReadAllLines(foodStockFilePath).ToList();
@@ -57,7 +83,8 @@ namespace CashMeInside
 
             if (productCategory == "drink")
             {
-                generateProductCode(productCategory);
+                productCode = generateProductCode(productCategory);
+                newProduct = String.Format("{0},{1},{2},{3}", productCode, productName, productQuantity, productPrice);
 
                 drinkProductsFromStock.Add(newProduct);
                 File.WriteAllLines(drinkStockFilePath, drinkProductsFromStock);
@@ -67,17 +94,14 @@ namespace CashMeInside
             }
             else if (productCategory == "food")
             {
-                generateProductCode(productCategory);
+                productCode = generateProductCode(productCategory);
+                newProduct = String.Format("{0},{1},{2},{3}", productCode, productName, productQuantity, productPrice);
 
                 foodProductsFromStock.Add(newProduct);
                 File.WriteAllLines(foodStockFilePath, foodProductsFromStock);
                 foodListBox.DataSource = null;
                 foodListBox.DataSource = foodProductsFromStock;
                 successfullySaved = true;
-            }
-            else
-            {
-                MessageBox.Show("Invalid stock category");
             }
 
             if (successfullySaved)
@@ -91,13 +115,14 @@ namespace CashMeInside
             productNameInput.Text = "";
             productQuantityInput.Text = "";
             productPriceInput.Text = "";
-            productCodeInput.Text = "";
         }
 
-        private void generateProductCode(string productCategory)
+        private string generateProductCode(string productCategory)
         {
-            string letterProductCode = (productCategory.Substring(0, 1)).ToUpper();
+            string extractExistingProductCode;
+            string firstLetterProductCode = (productCategory.Substring(0, 1)).ToUpper();
             List<string> productCodes = new List<string>();
+            List<int> productCodeNumbers = new List<int>();
 
             if (productCategory == "drink")
             {
@@ -105,7 +130,6 @@ namespace CashMeInside
 
                 foreach (var drinkProd in drinkProductsFromStock)
                 {
-                    string extractExistingProductCode;
                     int charLocation = drinkProd.IndexOf(",", StringComparison.Ordinal);
 
                     if (charLocation > 0)
@@ -118,21 +142,31 @@ namespace CashMeInside
             else
             { 
                 List<string> foodProductsFromStock = File.ReadAllLines(foodStockFilePath).ToList();
+
+                foreach (var foodProd in foodProductsFromStock)
+                {
+                    int charLocation = foodProd.IndexOf(",", StringComparison.Ordinal);
+
+                    if (charLocation > 0)
+                    {
+                        extractExistingProductCode = foodProd.Substring(0, charLocation);
+                        productCodes.Add(extractExistingProductCode);
+                    }
+                }
             }
 
             foreach (var productCode in productCodes)
             {
-                //int val;
-
-                //for (int i = 0; i < a.Length; i++)
-                //{
-                //    if (Char.IsDigit(a[i]))
-                //        b += a[i];
-                //}
-
-                //if (b.Length > 0)
-                //    val = int.Parse(b);
+                foreach (var productCodeCharacter in productCode)
+                {
+                    if (Char.IsDigit(productCodeCharacter))
+                    {
+                        productCodeNumbers.Add(int.Parse(productCodeCharacter.ToString()));
+                    }
+                }
             }
+
+            return firstLetterProductCode + (productCodeNumbers.Max()+1);
         }
 
         private void removeProductButton_Click(object sender, EventArgs e)
@@ -140,17 +174,32 @@ namespace CashMeInside
             List<string> drinkProductsFromStock = File.ReadAllLines(drinkStockFilePath).ToList();
             List<string> foodProductsFromStock = File.ReadAllLines(foodStockFilePath).ToList();
 
+            string removeableProductCode = productCodesCB.Text;
+
+            bool found = false;
             bool contains = false;
 
-            foreach (var foodProd in foodProductsFromStock)
+            foreach (var drinkProd in drinkProductsFromStock)
             {
-                contains = foodProd.Split(',').Contains("F1");
+                contains = drinkProd.Split(',').Contains(removeableProductCode);
+                if (contains)
+                {
+                    found = true;
+                    break;
+                }
             }
 
-            //string result = foodProductsFromStock.Find(item => item == "F1");
-            //MessageBox.Show(i);
-
-            //listString.Split(',').Contains("apple")
+            if (contains == false) {
+                foreach (var foodProd in foodProductsFromStock)
+                {
+                    contains = foodProd.Split(',').Contains(removeableProductCode);
+                    if (contains)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+            }
         }
     }
 }
