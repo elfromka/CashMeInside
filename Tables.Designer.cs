@@ -66,6 +66,7 @@
             this.tableOne.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.tableOne.TabIndex = 1;
             this.tableOne.TabStop = false;
+            this.tableOne.Click += new System.EventHandler(this.tableOne_Click);
             // 
             // tabelTwo
             // 
@@ -77,6 +78,7 @@
             this.tabelTwo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.tabelTwo.TabIndex = 5;
             this.tabelTwo.TabStop = false;
+            this.tabelTwo.Click += new System.EventHandler(this.tabelTwo_Click);
             // 
             // tableThree
             // 
@@ -88,6 +90,7 @@
             this.tableThree.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.tableThree.TabIndex = 7;
             this.tableThree.TabStop = false;
+            this.tableThree.Click += new System.EventHandler(this.tableThree_Click);
             // 
             // stockButton
             // 

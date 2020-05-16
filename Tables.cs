@@ -51,5 +51,26 @@ namespace CashMeInside
             loginWindow.ShowDialog();
             this.Close();
         }
+
+        private void tableOne_Click(object sender, EventArgs e)
+        {
+            Table tableWindow = new Table();
+            tableWindow.tableNumber = "1";
+            tableWindow.ShowDialog();
+        }
+
+        private void tabelTwo_Click(object sender, EventArgs e)
+        {
+            Table tableWindow = new Table();
+            tableWindow.tableNumber = "2";
+            tableWindow.ShowDialog();
+        }
+
+        private void tableThree_Click(object sender, EventArgs e)
+        {
+            Table tableWindow = new Table();
+            tableWindow.tableNumber = "3";
+            tableWindow.ShowDialog();
+        }
     }
 }

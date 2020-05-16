@@ -19,6 +19,9 @@ namespace CashMeInside
 
         private void Stock_Load(object sender, EventArgs e)
         {
+            // C:\Users\elfromka\AppData\Local - implement this to have the folder on other comps too.
+            //string localData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+
             bindCategoryList();
             bindProductCodesList();
 
