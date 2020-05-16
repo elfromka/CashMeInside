@@ -14,6 +14,7 @@ namespace CashMeInside
         List<string> onStockProductsList;
         string selectedItemText;
         int selectedIndex;
+        double totalClientCost = 0;
 
         public string tableNumber
         {
@@ -45,8 +46,11 @@ namespace CashMeInside
             }
             else
             {
+                totalClientCost = getTotalCost(currentTableProducts);
                 clientsPayButton.Enabled = true;
             }
+
+            totalPayNumberLabel.Text = Convert.ToString(totalClientCost);
 
             bindProducts();
         }
@@ -105,7 +109,6 @@ namespace CashMeInside
                 clientsPayButton.Enabled = true;
             }
 
-
             if (commaLocation > 0)
             {
                 productCategoryFirstLetter = selectedItemText.Substring(0, 1);
@@ -123,6 +126,9 @@ namespace CashMeInside
                 drinkProductsFromStock.Remove(selectedItemText);
                 File.WriteAllLines(drinkStockFilePath, drinkProductsFromStock);
             }
+
+            totalClientCost += getProductPrice(selectedItemText);
+            totalPayNumberLabel.Text = Convert.ToString(totalClientCost);
 
             dataBinding();
         }
@@ -175,6 +181,9 @@ namespace CashMeInside
                 File.WriteAllLines(drinkStockFilePath, drinkProductsFromStock);
             }
 
+            totalClientCost -= getProductPrice(selectedItemText);
+            totalPayNumberLabel.Text = Convert.ToString(totalClientCost);
+
             dataBinding();
         }
 
@@ -188,6 +197,29 @@ namespace CashMeInside
         {
             addBPListButton.Enabled = false;
             removeBPListButton.Enabled = true;
+        }
+
+        private double getProductPrice(string productInfo)
+        {
+            double productPrice = 0;
+            int lastIndexComma = productInfo.LastIndexOf(',');
+
+            productPrice = Double.Parse(productInfo.Substring(++lastIndexComma));
+
+            return productPrice;
+        }
+
+        private double getTotalCost(List<string> boughtProducts)
+        {
+            double totalCost = 0;
+
+            foreach (var boughtProduct in boughtProducts)
+            {
+                int lastIndexComma = boughtProduct.LastIndexOf(',');
+                totalCost += Double.Parse(boughtProduct.Substring(++lastIndexComma));
+            }
+
+            return totalCost;
         }
 
         private void clientsPayButton_Click(object sender, EventArgs e)

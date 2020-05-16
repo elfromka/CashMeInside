@@ -37,7 +37,6 @@
             this.removeBPListButton = new System.Windows.Forms.Button();
             this.totalToPayLabel = new System.Windows.Forms.Label();
             this.totalPayNumberLabel = new System.Windows.Forms.Label();
-            this.totalPayCurrencyLabel = new System.Windows.Forms.Label();
             this.clientsPayButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -116,32 +115,22 @@
             // 
             this.totalToPayLabel.AutoSize = true;
             this.totalToPayLabel.Font = new System.Drawing.Font("Raleway SemiBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalToPayLabel.Location = new System.Drawing.Point(262, 465);
+            this.totalToPayLabel.Location = new System.Drawing.Point(230, 465);
             this.totalToPayLabel.Name = "totalToPayLabel";
-            this.totalToPayLabel.Size = new System.Drawing.Size(140, 19);
+            this.totalToPayLabel.Size = new System.Drawing.Size(197, 19);
             this.totalToPayLabel.TabIndex = 0;
-            this.totalToPayLabel.Text = "Total of payment";
+            this.totalToPayLabel.Text = "Total of payment in RON";
             // 
             // totalPayNumberLabel
             // 
             this.totalPayNumberLabel.AutoSize = true;
             this.totalPayNumberLabel.Font = new System.Drawing.Font("Raleway SemiBold", 40F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalPayNumberLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.totalPayNumberLabel.Location = new System.Drawing.Point(281, 485);
+            this.totalPayNumberLabel.Location = new System.Drawing.Point(302, 484);
             this.totalPayNumberLabel.Name = "totalPayNumberLabel";
             this.totalPayNumberLabel.Size = new System.Drawing.Size(61, 64);
             this.totalPayNumberLabel.TabIndex = 0;
             this.totalPayNumberLabel.Text = "0";
-            // 
-            // totalPayCurrencyLabel
-            // 
-            this.totalPayCurrencyLabel.AutoSize = true;
-            this.totalPayCurrencyLabel.Font = new System.Drawing.Font("Raleway SemiBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalPayCurrencyLabel.Location = new System.Drawing.Point(342, 510);
-            this.totalPayCurrencyLabel.Name = "totalPayCurrencyLabel";
-            this.totalPayCurrencyLabel.Size = new System.Drawing.Size(44, 19);
-            this.totalPayCurrencyLabel.TabIndex = 0;
-            this.totalPayCurrencyLabel.Text = "RON";
             // 
             // clientsPayButton
             // 
@@ -182,7 +171,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.clientsPayButton);
-            this.Controls.Add(this.totalPayCurrencyLabel);
             this.Controls.Add(this.totalPayNumberLabel);
             this.Controls.Add(this.totalToPayLabel);
             this.Controls.Add(this.removeBPListButton);
@@ -212,7 +200,6 @@
         private System.Windows.Forms.Button removeBPListButton;
         private System.Windows.Forms.Label totalToPayLabel;
         private System.Windows.Forms.Label totalPayNumberLabel;
-        private System.Windows.Forms.Label totalPayCurrencyLabel;
         private System.Windows.Forms.Button clientsPayButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
