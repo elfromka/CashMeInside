@@ -75,8 +75,9 @@
             this.stockProductsListBox.ItemHeight = 19;
             this.stockProductsListBox.Location = new System.Drawing.Point(26, 234);
             this.stockProductsListBox.Name = "stockProductsListBox";
-            this.stockProductsListBox.Size = new System.Drawing.Size(224, 194);
+            this.stockProductsListBox.Size = new System.Drawing.Size(227, 194);
             this.stockProductsListBox.TabIndex = 1;
+            this.stockProductsListBox.SelectedIndexChanged += new System.EventHandler(this.stockProductsListBox_SelectedIndexChanged);
             // 
             // boughtProductsListBox
             // 
@@ -87,6 +88,7 @@
             this.boughtProductsListBox.Name = "boughtProductsListBox";
             this.boughtProductsListBox.Size = new System.Drawing.Size(231, 194);
             this.boughtProductsListBox.TabIndex = 2;
+            this.boughtProductsListBox.SelectedIndexChanged += new System.EventHandler(this.boughtProductsListBox_SelectedIndexChanged);
             // 
             // addBPListButton
             // 
@@ -176,7 +178,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(666, 651);
+            this.ClientSize = new System.Drawing.Size(666, 646);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.clientsPayButton);
@@ -194,6 +196,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "CashMeInside - Table";
+            this.Load += new System.EventHandler(this.Table_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tablePB)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

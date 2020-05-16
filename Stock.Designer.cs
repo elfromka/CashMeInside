@@ -159,9 +159,9 @@
             this.removeProductLabel.Font = new System.Drawing.Font("Raleway", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.removeProductLabel.Location = new System.Drawing.Point(20, 456);
             this.removeProductLabel.Name = "removeProductLabel";
-            this.removeProductLabel.Size = new System.Drawing.Size(69, 19);
+            this.removeProductLabel.Size = new System.Drawing.Size(111, 19);
             this.removeProductLabel.TabIndex = 18;
-            this.removeProductLabel.Text = "Product";
+            this.removeProductLabel.Text = "Product code";
             // 
             // productCodesCB
             // 

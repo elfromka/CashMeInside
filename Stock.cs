@@ -9,8 +9,8 @@ namespace CashMeInside
 {
     public partial class Stock : Form
     {
-        string drinkStockFilePath = @"C:\Users\elfromka\source\repos\CashMeInside\stock\drink.txt";
-        string foodStockFilePath = @"C:\Users\elfromka\source\repos\CashMeInside\stock\food.txt";
+        string drinkStockFilePath = String.Format(@"{0}stock\drink.txt", AppDomain.CurrentDomain.BaseDirectory);
+        string foodStockFilePath = String.Format(@"{0}stock\food.txt", AppDomain.CurrentDomain.BaseDirectory);
 
         public Stock()
         {
