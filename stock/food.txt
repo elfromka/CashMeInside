@@ -1,4 +1,1 @@
-F1,Pizza,12
-F2,Hamburger,12
-F3,Fries,6
-F4,T-bone,25
+F1,test food,1

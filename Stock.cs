@@ -200,11 +200,11 @@ namespace CashMeInside
 
                 foreach (var drinkProd in drinkProductsFromStock)
                 {
-                    int charLocation = drinkProd.IndexOf(",", StringComparison.Ordinal);
+                    int commaLocation = drinkProd.IndexOf(",", StringComparison.Ordinal);
 
-                    if (charLocation > 0)
+                    if (commaLocation > 0)
                     {
-                        extractExistingProductCode = drinkProd.Substring(0, charLocation);
+                        extractExistingProductCode = drinkProd.Substring(0, commaLocation);
                         productCodes.Add(extractExistingProductCode);
                     }
                 }
@@ -215,11 +215,11 @@ namespace CashMeInside
 
                 foreach (var foodProd in foodProductsFromStock)
                 {
-                    int charLocation = foodProd.IndexOf(",", StringComparison.Ordinal);
+                    int commaLocation = foodProd.IndexOf(",", StringComparison.Ordinal);
 
-                    if (charLocation > 0)
+                    if (commaLocation > 0)
                     {
-                        extractExistingProductCode = foodProd.Substring(0, charLocation);
+                        extractExistingProductCode = foodProd.Substring(0, commaLocation);
                         productCodes.Add(extractExistingProductCode);
                     }
                 }
