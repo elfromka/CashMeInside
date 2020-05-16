@@ -27,7 +27,8 @@ namespace CashMeInside
             if ((username == "admin" && password == "admin123") || (username == "waiter" && password == "waiter123"))
             {
                 this.Hide();
-                tablesWindow.Show();
+                tablesWindow.ShowDialog();
+                this.Close();
             }
             else
             {

@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.IO;
-using System.Collections;
 
 namespace CashMeInside
 {
@@ -20,12 +20,28 @@ namespace CashMeInside
         private void Stock_Load(object sender, EventArgs e)
         {
             bindCategoryList();
+            bindProductCodesList();
 
+            List<string> drinkProductsFromStock = File.ReadAllLines(drinkStockFilePath).ToList();
+            List<string> foodProductsFromStock = File.ReadAllLines(foodStockFilePath).ToList();
+
+            if (drinkProductsFromStock.Count == 0 && foodProductsFromStock.Count == 0)
+            {
+                removeProductButton.Enabled = false;
+            }
+
+            drinkListBox.DataSource = drinkProductsFromStock;
+            foodListBox.DataSource = foodProductsFromStock;
+        }
+
+        private void bindProductCodesList()
+        {
             List<string> drinkProductsFromStock = File.ReadAllLines(drinkStockFilePath).ToList();
             List<string> foodProductsFromStock = File.ReadAllLines(foodStockFilePath).ToList();
 
             List<string> existingDrinkProductCodes = new List<string>();
             List<string> existingFoodProductCodes = new List<string>();
+            List<string> newList = new List<string>();
 
             foreach (var drinkProd in drinkProductsFromStock)
             {
@@ -47,30 +63,60 @@ namespace CashMeInside
                 }
             }
 
-            var newList = existingDrinkProductCodes.Concat(existingFoodProductCodes).ToList();
+            if (existingDrinkProductCodes.Count == 0 && existingFoodProductCodes.Count > 0)
+            {
+                newList = existingFoodProductCodes.ToList();
+            }
+            else if (existingFoodProductCodes.Count == 0 && existingDrinkProductCodes.Count > 0)
+            {
+                newList = existingDrinkProductCodes.ToList();
+            }
+            else
+            {
+                newList = existingDrinkProductCodes.Concat(existingFoodProductCodes).ToList();
+            }
 
             productCodesCB.DataSource = newList;
-            productCodesCB.SelectedIndex = 0;
             productCodesCB.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            drinkListBox.DataSource = drinkProductsFromStock;
-            foodListBox.DataSource = foodProductsFromStock;
+            if (newList.Count > 0)
+            {
+                productCodesCB.SelectedIndex = 0;
+                productCodesCB.Enabled = true;
+            }
+            else
+            {
+                productCodesCB.Enabled = false;
+            }
         }
 
         private void bindCategoryList()
         {
             ArrayList CategoryList = new ArrayList();
+
             CategoryList.Add("drink");
             CategoryList.Add("food");
+
             productCategoryCB.DataSource = CategoryList;
             productCategoryCB.SelectedIndex = 0;
             productCategoryCB.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
+        public bool validFields(string productName, double productPrice)
+        {
+            bool isValid = false;
+
+            if (productName.Length > 0 && productPrice > 0)
+            {
+                isValid = true;
+            }
+
+            return isValid;
+        }
+
         private void addProductButton_Click(object sender, EventArgs e)
         {
             string productName = productNameInput.Text;
-            int productQuantity = Convert.ToInt32(productQuantityInput.Text);
             double productPrice = Convert.ToDouble(productPriceInput.Text);
             string productCategory = productCategoryCB.Text;
             string productCode;
@@ -84,28 +130,49 @@ namespace CashMeInside
             if (productCategory == "drink")
             {
                 productCode = generateProductCode(productCategory);
-                newProduct = String.Format("{0},{1},{2},{3}", productCode, productName, productQuantity, productPrice);
+                bool validatedFields = validFields(productName, productPrice);
+                if (validatedFields)
+                {
+                    newProduct = String.Format("{0},{1},{2}", productCode, productName, productPrice);
 
-                drinkProductsFromStock.Add(newProduct);
-                File.WriteAllLines(drinkStockFilePath, drinkProductsFromStock);
-                drinkListBox.DataSource = null;
-                drinkListBox.DataSource = drinkProductsFromStock;
-                successfullySaved = true;
+                    drinkProductsFromStock.Add(newProduct);
+                    File.WriteAllLines(drinkStockFilePath, drinkProductsFromStock);
+                    drinkListBox.DataSource = null;
+                    drinkListBox.DataSource = drinkProductsFromStock;
+
+                    successfullySaved = true;
+                }
+                else
+                {
+                    MessageBox.Show("Some fields aren't correctly completed. Please, re-check them!", "Something is wrong!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
             else if (productCategory == "food")
             {
                 productCode = generateProductCode(productCategory);
-                newProduct = String.Format("{0},{1},{2},{3}", productCode, productName, productQuantity, productPrice);
+                bool validatedFields = validFields(productName, productPrice);
+                if (validatedFields)
+                {
+                    newProduct = String.Format("{0},{1},{2}", productCode, productName, productPrice);
 
-                foodProductsFromStock.Add(newProduct);
-                File.WriteAllLines(foodStockFilePath, foodProductsFromStock);
-                foodListBox.DataSource = null;
-                foodListBox.DataSource = foodProductsFromStock;
-                successfullySaved = true;
+                    foodProductsFromStock.Add(newProduct);
+                    File.WriteAllLines(foodStockFilePath, foodProductsFromStock);
+                    foodListBox.DataSource = null;
+                    foodListBox.DataSource = foodProductsFromStock;
+
+                    successfullySaved = true;
+                }
+                else
+                {
+                    MessageBox.Show("Some fields aren't correctly completed!", "Something is wrong!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
 
             if (successfullySaved)
             {
+                removeProductButton.Enabled = true;
+
+                bindProductCodesList();
                 clearAllFields();
             }
         }
@@ -113,12 +180,12 @@ namespace CashMeInside
         private void clearAllFields()
         {
             productNameInput.Text = "";
-            productQuantityInput.Text = "";
-            productPriceInput.Text = "";
+            productPriceInput.Text = "1";
         }
 
         private string generateProductCode(string productCategory)
         {
+            int maxNumber;
             string extractExistingProductCode;
             string firstLetterProductCode = (productCategory.Substring(0, 1)).ToUpper();
             List<string> productCodes = new List<string>();
@@ -140,7 +207,7 @@ namespace CashMeInside
                 }
             }
             else
-            { 
+            {
                 List<string> foodProductsFromStock = File.ReadAllLines(foodStockFilePath).ToList();
 
                 foreach (var foodProd in foodProductsFromStock)
@@ -155,50 +222,90 @@ namespace CashMeInside
                 }
             }
 
-            foreach (var productCode in productCodes)
+            if (productCodes.Count > 0)
             {
-                foreach (var productCodeCharacter in productCode)
+                foreach (var productCode in productCodes)
                 {
-                    if (Char.IsDigit(productCodeCharacter))
+                    foreach (var productCodeCharacter in productCode)
                     {
-                        productCodeNumbers.Add(int.Parse(productCodeCharacter.ToString()));
+                        if (Char.IsDigit(productCodeCharacter))
+                        {
+                            productCodeNumbers.Add(int.Parse(productCodeCharacter.ToString()));
+                        }
                     }
                 }
+                maxNumber = productCodeNumbers.Max();
+            }
+            else
+            {
+                maxNumber = 0;
             }
 
-            return firstLetterProductCode + (productCodeNumbers.Max()+1);
+            return firstLetterProductCode + (maxNumber + 1);
         }
 
         private void removeProductButton_Click(object sender, EventArgs e)
         {
+            bool contains = false;
+            int productPositionInFile = 0;
+            string stockFileName = "drink";
+            string removeableProductCode = productCodesCB.Text;
+
             List<string> drinkProductsFromStock = File.ReadAllLines(drinkStockFilePath).ToList();
             List<string> foodProductsFromStock = File.ReadAllLines(foodStockFilePath).ToList();
 
-            string removeableProductCode = productCodesCB.Text;
-
-            bool found = false;
-            bool contains = false;
-
             foreach (var drinkProd in drinkProductsFromStock)
             {
+                productPositionInFile++;
                 contains = drinkProd.Split(',').Contains(removeableProductCode);
                 if (contains)
                 {
-                    found = true;
                     break;
                 }
             }
 
-            if (contains == false) {
+            if (contains == false)
+            {
+                stockFileName = "food";
+                productPositionInFile = 0;
                 foreach (var foodProd in foodProductsFromStock)
                 {
+                    productPositionInFile++;
                     contains = foodProd.Split(',').Contains(removeableProductCode);
                     if (contains)
                     {
-                        found = true;
                         break;
                     }
                 }
+            }
+
+            removeProduct(stockFileName, productPositionInFile);
+            bindProductCodesList();
+        }
+
+        private void removeProduct(string stockFileName, int productPositionInFile)
+        {
+            productPositionInFile--;
+
+            if (stockFileName == "drink")
+            {
+                List<string> drinkProductsFromStock = File.ReadAllLines(drinkStockFilePath).ToList();
+
+                drinkProductsFromStock.RemoveAt(productPositionInFile);
+                File.WriteAllLines(drinkStockFilePath, drinkProductsFromStock);
+
+                drinkListBox.DataSource = null;
+                drinkListBox.DataSource = drinkProductsFromStock;
+            }
+            else
+            {
+                List<string> foodProductsFromStock = File.ReadAllLines(foodStockFilePath).ToList();
+
+                foodProductsFromStock.RemoveAt(productPositionInFile);
+                File.WriteAllLines(foodStockFilePath, foodProductsFromStock);
+
+                foodListBox.DataSource = null;
+                foodListBox.DataSource = foodProductsFromStock;
             }
         }
     }

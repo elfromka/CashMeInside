@@ -25,6 +25,11 @@ namespace CashMeInside
             }
         }
 
+        public Tables()
+        {
+            InitializeComponent();
+        }
+
         private void Tables_Load(object sender, EventArgs e)
         {
             if (usernameLabelText != "admin")
@@ -33,22 +38,18 @@ namespace CashMeInside
             }
         }
 
-        public Tables()
+        private void stockButton_Click(object sender, EventArgs e)
         {
-            InitializeComponent();
+            Stock stockWindow = new Stock();
+            stockWindow.ShowDialog(this);
         }
 
         private void logOutButton_Click(object sender, EventArgs e)
         {
             this.Hide();
             Login loginWindow = new Login();
-            loginWindow.Show();
-        }
-
-        private void stockButton_Click(object sender, EventArgs e)
-        {
-            Stock stockWindow = new Stock();
-            stockWindow.ShowDialog(this);
+            loginWindow.ShowDialog();
+            this.Close();
         }
     }
 }
