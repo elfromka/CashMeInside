@@ -30,7 +30,7 @@ namespace CashMeInside
 
             if (drinkProductsFromStock.Count == 0 && foodProductsFromStock.Count == 0)
             {
-                removeProductButton.Enabled = false;
+                removeFoodProductButton.Enabled = false;
             }
 
             drinkListBox.DataSource = drinkProductsFromStock;
@@ -173,7 +173,7 @@ namespace CashMeInside
 
             if (successfullySaved)
             {
-                removeProductButton.Enabled = true;
+                removeFoodProductButton.Enabled = true;
 
                 bindProductCodesList();
                 clearAllFields();

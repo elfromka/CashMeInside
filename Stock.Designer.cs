@@ -39,17 +39,15 @@
             this.drinkListBox = new System.Windows.Forms.ListBox();
             this.foodListLabel = new System.Windows.Forms.Label();
             this.drinkListLabel = new System.Windows.Forms.Label();
-            this.removeProductLabel = new System.Windows.Forms.Label();
-            this.productCodesCB = new System.Windows.Forms.ComboBox();
             this.addNewProductTitleLabel = new System.Windows.Forms.Label();
-            this.removeProductButton = new System.Windows.Forms.Button();
-            this.removeExistingProductTitleLabel = new System.Windows.Forms.Label();
+            this.removeFoodProductButton = new System.Windows.Forms.Button();
+            this.removeDrinkProductButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // productNameInput
             // 
             this.productNameInput.Font = new System.Drawing.Font("Raleway", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productNameInput.Location = new System.Drawing.Point(24, 373);
+            this.productNameInput.Location = new System.Drawing.Point(24, 456);
             this.productNameInput.Name = "productNameInput";
             this.productNameInput.Size = new System.Drawing.Size(225, 23);
             this.productNameInput.TabIndex = 7;
@@ -58,7 +56,7 @@
             // 
             this.productCategoryCB.Font = new System.Drawing.Font("Raleway", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.productCategoryCB.FormattingEnabled = true;
-            this.productCategoryCB.Location = new System.Drawing.Point(400, 373);
+            this.productCategoryCB.Location = new System.Drawing.Point(400, 456);
             this.productCategoryCB.Name = "productCategoryCB";
             this.productCategoryCB.Size = new System.Drawing.Size(150, 23);
             this.productCategoryCB.TabIndex = 15;
@@ -66,7 +64,7 @@
             // addProductButton
             // 
             this.addProductButton.Font = new System.Drawing.Font("Raleway", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addProductButton.Location = new System.Drawing.Point(565, 366);
+            this.addProductButton.Location = new System.Drawing.Point(565, 449);
             this.addProductButton.Name = "addProductButton";
             this.addProductButton.Size = new System.Drawing.Size(95, 34);
             this.addProductButton.TabIndex = 16;
@@ -88,7 +86,7 @@
             // 
             this.productNameLabel.AutoSize = true;
             this.productNameLabel.Font = new System.Drawing.Font("Raleway", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productNameLabel.Location = new System.Drawing.Point(20, 351);
+            this.productNameLabel.Location = new System.Drawing.Point(20, 434);
             this.productNameLabel.Name = "productNameLabel";
             this.productNameLabel.Size = new System.Drawing.Size(115, 19);
             this.productNameLabel.TabIndex = 6;
@@ -98,7 +96,7 @@
             // 
             this.productPriceLabel.AutoSize = true;
             this.productPriceLabel.Font = new System.Drawing.Font("Raleway", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productPriceLabel.Location = new System.Drawing.Point(264, 351);
+            this.productPriceLabel.Location = new System.Drawing.Point(264, 434);
             this.productPriceLabel.Name = "productPriceLabel";
             this.productPriceLabel.Size = new System.Drawing.Size(46, 19);
             this.productPriceLabel.TabIndex = 12;
@@ -107,7 +105,7 @@
             // productPriceInput
             // 
             this.productPriceInput.Font = new System.Drawing.Font("Raleway", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productPriceInput.Location = new System.Drawing.Point(268, 373);
+            this.productPriceInput.Location = new System.Drawing.Point(268, 456);
             this.productPriceInput.Name = "productPriceInput";
             this.productPriceInput.Size = new System.Drawing.Size(116, 23);
             this.productPriceInput.TabIndex = 13;
@@ -117,7 +115,7 @@
             // 
             this.productCategoryLabel.AutoSize = true;
             this.productCategoryLabel.Font = new System.Drawing.Font("Raleway", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productCategoryLabel.Location = new System.Drawing.Point(396, 351);
+            this.productCategoryLabel.Location = new System.Drawing.Point(396, 434);
             this.productCategoryLabel.Name = "productCategoryLabel";
             this.productCategoryLabel.Size = new System.Drawing.Size(140, 19);
             this.productCategoryLabel.TabIndex = 14;
@@ -153,68 +151,46 @@
             this.drinkListLabel.TabIndex = 3;
             this.drinkListLabel.Text = "Drink list";
             // 
-            // removeProductLabel
-            // 
-            this.removeProductLabel.AutoSize = true;
-            this.removeProductLabel.Font = new System.Drawing.Font("Raleway", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.removeProductLabel.Location = new System.Drawing.Point(20, 456);
-            this.removeProductLabel.Name = "removeProductLabel";
-            this.removeProductLabel.Size = new System.Drawing.Size(111, 19);
-            this.removeProductLabel.TabIndex = 18;
-            this.removeProductLabel.Text = "Product code";
-            // 
-            // productCodesCB
-            // 
-            this.productCodesCB.Font = new System.Drawing.Font("Raleway", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productCodesCB.FormattingEnabled = true;
-            this.productCodesCB.Location = new System.Drawing.Point(24, 478);
-            this.productCodesCB.Name = "productCodesCB";
-            this.productCodesCB.Size = new System.Drawing.Size(173, 23);
-            this.productCodesCB.TabIndex = 19;
-            // 
             // addNewProductTitleLabel
             // 
             this.addNewProductTitleLabel.AutoSize = true;
             this.addNewProductTitleLabel.Font = new System.Drawing.Font("Raleway SemiBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addNewProductTitleLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.addNewProductTitleLabel.Location = new System.Drawing.Point(20, 322);
+            this.addNewProductTitleLabel.Location = new System.Drawing.Point(20, 405);
             this.addNewProductTitleLabel.Name = "addNewProductTitleLabel";
             this.addNewProductTitleLabel.Size = new System.Drawing.Size(142, 19);
             this.addNewProductTitleLabel.TabIndex = 5;
             this.addNewProductTitleLabel.Text = "Add new product";
             // 
-            // removeProductButton
+            // removeFoodProductButton
             // 
-            this.removeProductButton.Font = new System.Drawing.Font("Raleway", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.removeProductButton.Location = new System.Drawing.Point(211, 471);
-            this.removeProductButton.Name = "removeProductButton";
-            this.removeProductButton.Size = new System.Drawing.Size(104, 34);
-            this.removeProductButton.TabIndex = 22;
-            this.removeProductButton.Text = "- Remove";
-            this.removeProductButton.UseVisualStyleBackColor = true;
-            this.removeProductButton.Click += new System.EventHandler(this.removeProductButton_Click);
+            this.removeFoodProductButton.Font = new System.Drawing.Font("Raleway", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removeFoodProductButton.Location = new System.Drawing.Point(285, 319);
+            this.removeFoodProductButton.Name = "removeFoodProductButton";
+            this.removeFoodProductButton.Size = new System.Drawing.Size(104, 34);
+            this.removeFoodProductButton.TabIndex = 22;
+            this.removeFoodProductButton.Text = "- Remove";
+            this.removeFoodProductButton.UseVisualStyleBackColor = true;
+            this.removeFoodProductButton.Click += new System.EventHandler(this.removeProductButton_Click);
             // 
-            // removeExistingProductTitleLabel
+            // removeDrinkProductButton
             // 
-            this.removeExistingProductTitleLabel.AutoSize = true;
-            this.removeExistingProductTitleLabel.Font = new System.Drawing.Font("Raleway SemiBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.removeExistingProductTitleLabel.ForeColor = System.Drawing.Color.Red;
-            this.removeExistingProductTitleLabel.Location = new System.Drawing.Point(20, 428);
-            this.removeExistingProductTitleLabel.Name = "removeExistingProductTitleLabel";
-            this.removeExistingProductTitleLabel.Size = new System.Drawing.Size(203, 19);
-            this.removeExistingProductTitleLabel.TabIndex = 17;
-            this.removeExistingProductTitleLabel.Text = "Remove existing product";
+            this.removeDrinkProductButton.Font = new System.Drawing.Font("Raleway", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removeDrinkProductButton.Location = new System.Drawing.Point(686, 319);
+            this.removeDrinkProductButton.Name = "removeDrinkProductButton";
+            this.removeDrinkProductButton.Size = new System.Drawing.Size(104, 34);
+            this.removeDrinkProductButton.TabIndex = 23;
+            this.removeDrinkProductButton.Text = "- Remove";
+            this.removeDrinkProductButton.UseVisualStyleBackColor = true;
             // 
             // Stock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(810, 528);
-            this.Controls.Add(this.removeExistingProductTitleLabel);
-            this.Controls.Add(this.removeProductButton);
+            this.ClientSize = new System.Drawing.Size(810, 517);
+            this.Controls.Add(this.removeDrinkProductButton);
+            this.Controls.Add(this.removeFoodProductButton);
             this.Controls.Add(this.addNewProductTitleLabel);
-            this.Controls.Add(this.removeProductLabel);
-            this.Controls.Add(this.productCodesCB);
             this.Controls.Add(this.drinkListLabel);
             this.Controls.Add(this.foodListLabel);
             this.Controls.Add(this.drinkListBox);
@@ -251,10 +227,8 @@
         private System.Windows.Forms.ListBox drinkListBox;
         private System.Windows.Forms.Label foodListLabel;
         private System.Windows.Forms.Label drinkListLabel;
-        private System.Windows.Forms.Label removeProductLabel;
-        private System.Windows.Forms.ComboBox productCodesCB;
         private System.Windows.Forms.Label addNewProductTitleLabel;
-        private System.Windows.Forms.Button removeProductButton;
-        private System.Windows.Forms.Label removeExistingProductTitleLabel;
+        private System.Windows.Forms.Button removeFoodProductButton;
+        private System.Windows.Forms.Button removeDrinkProductButton;
     }
 }
