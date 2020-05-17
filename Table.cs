@@ -29,8 +29,6 @@ namespace CashMeInside
             }
         }
 
-        string currentTableFilePath = String.Format(@"{0}\\tables\\table{1}.txt", AppDomain.CurrentDomain.BaseDirectory, "1");
-
         public Table()
         {
             InitializeComponent();
@@ -38,6 +36,7 @@ namespace CashMeInside
 
         private void Table_Load(object sender, EventArgs e)
         {
+            string currentTableFilePath = String.Format(@"{0}\\tables\\table{1}.txt", AppDomain.CurrentDomain.BaseDirectory, tableNumber);
             List<string> currentTableProducts = File.ReadAllLines(currentTableFilePath).ToList();
 
             if (currentTableProducts.Count == 0)
@@ -57,6 +56,8 @@ namespace CashMeInside
 
         private void bindProducts()
         {
+            string currentTableFilePath = String.Format(@"{0}\\tables\\table{1}.txt", AppDomain.CurrentDomain.BaseDirectory, tableNumber);
+
             List<string> drinkProductsFromStock = File.ReadAllLines(drinkStockFilePath).ToList();
             List<string> foodProductsFromStock = File.ReadAllLines(foodStockFilePath).ToList();
             List<string> currentTableProducts = File.ReadAllLines(currentTableFilePath).ToList();
@@ -94,6 +95,7 @@ namespace CashMeInside
                 onStockProductsList.RemoveAt(selectedIndex);
             }
 
+            string currentTableFilePath = String.Format(@"{0}\\tables\\table{1}.txt", AppDomain.CurrentDomain.BaseDirectory, tableNumber);
             List<string> currentTableProducts = File.ReadAllLines(currentTableFilePath).ToList();
             currentTableProducts.Add(selectedItemText);
             File.WriteAllLines(currentTableFilePath, currentTableProducts);
@@ -141,6 +143,7 @@ namespace CashMeInside
 
         private void removeBPListButton_Click(object sender, EventArgs e)
         {
+            string currentTableFilePath = String.Format(@"{0}\\tables\\table{1}.txt", AppDomain.CurrentDomain.BaseDirectory, tableNumber);
             string productCategoryFirstLetter = "D";
             selectedItemText = boughtProductsListBox.SelectedItem.ToString();
             selectedIndex = boughtProductsListBox.SelectedIndex;
@@ -224,6 +227,7 @@ namespace CashMeInside
 
         private void clientsPayButton_Click(object sender, EventArgs e)
         {
+            string currentTableFilePath = String.Format(@"{0}\\tables\\table{1}.txt", AppDomain.CurrentDomain.BaseDirectory, tableNumber);
             List<string> currentTableProducts = File.ReadAllLines(currentTableFilePath).ToList();
             currentTableProducts.Clear();
             File.WriteAllLines(currentTableFilePath, currentTableProducts);
