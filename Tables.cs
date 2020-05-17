@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace CashMeInside
@@ -35,6 +29,53 @@ namespace CashMeInside
             if (usernameLabelText != "admin")
             {
                 stockButton.Enabled = false;
+            }
+
+            checkFoldersAndFiles();
+        }
+
+        private void checkFoldersAndFiles()
+        {
+            string stockFolderPath = String.Format(@"{0}stock", AppDomain.CurrentDomain.BaseDirectory);
+            if (!Directory.Exists(stockFolderPath))
+            {
+                Directory.CreateDirectory(stockFolderPath);
+            }
+           
+            string checkForDrinkFile = String.Format(@"{0}stock\drink.txt", AppDomain.CurrentDomain.BaseDirectory);
+            if (!File.Exists(checkForDrinkFile))
+            {
+                FileStream fs = new FileStream(checkForDrinkFile, FileMode.OpenOrCreate);
+            }
+
+            string checkForFoodFile = String.Format(@"{0}stock\food.txt", AppDomain.CurrentDomain.BaseDirectory);
+            if (!File.Exists(checkForFoodFile))
+            {
+                FileStream fs = new FileStream(checkForFoodFile, FileMode.OpenOrCreate);
+            }
+
+            string tablesFolderPath = String.Format(@"{0}tables", AppDomain.CurrentDomain.BaseDirectory);
+            if (!Directory.Exists(tablesFolderPath))
+            {
+                Directory.CreateDirectory(tablesFolderPath);
+            }
+
+            string checkForTableOneFile = String.Format(@"{0}tables\table1.txt", AppDomain.CurrentDomain.BaseDirectory);
+            if (!File.Exists(checkForTableOneFile))
+            {
+                FileStream fs = new FileStream(checkForTableOneFile, FileMode.OpenOrCreate);
+            }
+
+            string checkForTableTwoFile = String.Format(@"{0}tables\table2.txt", AppDomain.CurrentDomain.BaseDirectory);
+            if (!File.Exists(checkForTableTwoFile))
+            {
+                FileStream fs = new FileStream(checkForTableTwoFile, FileMode.OpenOrCreate);
+            }
+
+            string checkForTableThreeFile = String.Format(@"{0}tables\table3.txt", AppDomain.CurrentDomain.BaseDirectory);
+            if (!File.Exists(checkForTableThreeFile))
+            {
+                FileStream fs = new FileStream(checkForTableThreeFile, FileMode.OpenOrCreate);
             }
         }
 
