@@ -126,11 +126,12 @@
             this.totalPayNumberLabel.AutoSize = true;
             this.totalPayNumberLabel.Font = new System.Drawing.Font("Raleway SemiBold", 40F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalPayNumberLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.totalPayNumberLabel.Location = new System.Drawing.Point(302, 484);
+            this.totalPayNumberLabel.Location = new System.Drawing.Point(298, 484);
             this.totalPayNumberLabel.Name = "totalPayNumberLabel";
             this.totalPayNumberLabel.Size = new System.Drawing.Size(61, 64);
             this.totalPayNumberLabel.TabIndex = 0;
             this.totalPayNumberLabel.Text = "0";
+            this.totalPayNumberLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // clientsPayButton
             // 

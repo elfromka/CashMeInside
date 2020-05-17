@@ -12,8 +12,13 @@ namespace CashMeInside
         string foodStockFilePath = String.Format(@"{0}stock\food.txt", AppDomain.CurrentDomain.BaseDirectory);
 
         List<string> onStockProductsList;
-        string selectedItemText;
-        int selectedIndex;
+        string selectedStockItemText;
+        int selectedStockIndex;
+
+        List<string> boughtProductsList;
+        string selectedBoughtItemText;
+        int selectedBoughtIndex;
+
         double totalClientCost = 0;
 
         public string tableNumber
@@ -52,15 +57,13 @@ namespace CashMeInside
             totalPayNumberLabel.Text = Convert.ToString(totalClientCost);
 
             bindProducts();
+            bindBoughtProducts();
         }
 
         private void bindProducts()
         {
-            string currentTableFilePath = String.Format(@"{0}\\tables\\table{1}.txt", AppDomain.CurrentDomain.BaseDirectory, tableNumber);
-
             List<string> drinkProductsFromStock = File.ReadAllLines(drinkStockFilePath).ToList();
             List<string> foodProductsFromStock = File.ReadAllLines(foodStockFilePath).ToList();
-            List<string> currentTableProducts = File.ReadAllLines(currentTableFilePath).ToList();
 
             if (drinkProductsFromStock.Count == 0 && foodProductsFromStock.Count > 0)
             {
@@ -75,32 +78,35 @@ namespace CashMeInside
                 onStockProductsList = drinkProductsFromStock.Concat(foodProductsFromStock).ToList();
             }
 
-            if (currentTableProducts.Count > 0)
-            {
-                boughtProductsListBox.DataSource = currentTableProducts;
-            }
-
             stockProductsListBox.DataSource = onStockProductsList;
+        }
+
+        private void bindBoughtProducts()
+        {
+            string currentFilePath = String.Format(@"{0}tables\table{1}.txt", AppDomain.CurrentDomain.BaseDirectory, tableNumber);
+            List<string> currentTableProducts = File.ReadAllLines(currentFilePath).ToList();
+
+            boughtProductsList = currentTableProducts.ToList();
+            boughtProductsListBox.DataSource = boughtProductsList;
         }
 
         private void addBPListButton_Click(object sender, EventArgs e)
         {
+            string currentFilePath = String.Format(@"{0}tables\table{1}.txt", AppDomain.CurrentDomain.BaseDirectory, tableNumber);
             string productCategoryFirstLetter = "D";
-            selectedItemText = stockProductsListBox.SelectedItem.ToString();
-            selectedIndex = stockProductsListBox.SelectedIndex;
-            boughtProductsListBox.Items.Add(selectedItemText);
+
+            selectedStockItemText = stockProductsListBox.SelectedItem.ToString();
+            selectedStockIndex = stockProductsListBox.SelectedIndex;
+            boughtProductsList.Add(selectedBoughtItemText);
 
             if (onStockProductsList != null)
             {
-                onStockProductsList.RemoveAt(selectedIndex);
+                onStockProductsList.RemoveAt(selectedStockIndex);
             }
 
-            string currentTableFilePath = String.Format(@"{0}\\tables\\table{1}.txt", AppDomain.CurrentDomain.BaseDirectory, tableNumber);
-            List<string> currentTableProducts = File.ReadAllLines(currentTableFilePath).ToList();
-            currentTableProducts.Add(selectedItemText);
-            File.WriteAllLines(currentTableFilePath, currentTableProducts);
-
-            int commaLocation = selectedItemText.IndexOf(",", StringComparison.Ordinal);
+            List<string> currentTableProducts = File.ReadAllLines(currentFilePath).ToList();
+            currentTableProducts.Add(selectedStockItemText);
+            File.WriteAllLines(currentFilePath, currentTableProducts);
 
             if (currentTableProducts.Count == 0)
             {
@@ -111,49 +117,50 @@ namespace CashMeInside
                 clientsPayButton.Enabled = true;
             }
 
+            int commaLocation = selectedStockItemText.IndexOf(",", StringComparison.Ordinal);
+
             if (commaLocation > 0)
             {
-                productCategoryFirstLetter = selectedItemText.Substring(0, 1);
+                productCategoryFirstLetter = selectedStockItemText.Substring(0, 1);
             }
 
             if (productCategoryFirstLetter != "D")
             {
                 List<string> foodProductsFromStock = File.ReadAllLines(foodStockFilePath).ToList();
-                foodProductsFromStock.Remove(selectedItemText);
+                foodProductsFromStock.Remove(selectedStockItemText);
                 File.WriteAllLines(foodStockFilePath, foodProductsFromStock);
             }
             else
             {
                 List<string> drinkProductsFromStock = File.ReadAllLines(drinkStockFilePath).ToList();
-                drinkProductsFromStock.Remove(selectedItemText);
+                drinkProductsFromStock.Remove(selectedStockItemText);
                 File.WriteAllLines(drinkStockFilePath, drinkProductsFromStock);
             }
 
-            totalClientCost += getProductPrice(selectedItemText);
+            totalClientCost += getProductPrice(selectedStockItemText);
             totalPayNumberLabel.Text = Convert.ToString(totalClientCost);
 
-            dataBinding();
-        }
-
-        private void dataBinding()
-        {
-            stockProductsListBox.DataSource = null;
-            stockProductsListBox.DataSource = onStockProductsList;
+            bindProducts();
+            bindBoughtProducts();
         }
 
         private void removeBPListButton_Click(object sender, EventArgs e)
         {
-            string currentTableFilePath = String.Format(@"{0}\\tables\\table{1}.txt", AppDomain.CurrentDomain.BaseDirectory, tableNumber);
+            string currentFilePath = String.Format(@"{0}tables\table{1}.txt", AppDomain.CurrentDomain.BaseDirectory, tableNumber);
             string productCategoryFirstLetter = "D";
-            selectedItemText = boughtProductsListBox.SelectedItem.ToString();
-            selectedIndex = boughtProductsListBox.SelectedIndex;
 
-            onStockProductsList.Add(selectedItemText);
-            boughtProductsListBox.Items.RemoveAt(boughtProductsListBox.Items.IndexOf(boughtProductsListBox.SelectedItem));
+            selectedBoughtItemText = boughtProductsListBox.SelectedItem.ToString();
+            selectedBoughtIndex = boughtProductsListBox.SelectedIndex;
+            onStockProductsList.Add(selectedBoughtItemText);
 
-            List<string> currentTableProducts = File.ReadAllLines(currentTableFilePath).ToList();
-            currentTableProducts.Remove(selectedItemText);
-            File.WriteAllLines(currentTableFilePath, currentTableProducts);
+            if (boughtProductsList != null)
+            {
+                boughtProductsList.RemoveAt(selectedBoughtIndex);
+            }
+
+            List<string> currentTableProducts = File.ReadAllLines(currentFilePath).ToList();
+            currentTableProducts.Remove(selectedBoughtItemText);
+            File.WriteAllLines(currentFilePath, currentTableProducts);
 
             if (currentTableProducts.Count == 0)
             {
@@ -164,30 +171,31 @@ namespace CashMeInside
                 clientsPayButton.Enabled = true;
             }
 
-            int commaLocation = selectedItemText.IndexOf(",", StringComparison.Ordinal);
+            int commaLocation = selectedBoughtItemText.IndexOf(",", StringComparison.Ordinal);
 
             if (commaLocation > 0)
             {
-                productCategoryFirstLetter = selectedItemText.Substring(0, 1);
+                productCategoryFirstLetter = selectedBoughtItemText.Substring(0, 1);
             }
 
             if (productCategoryFirstLetter != "D")
             {
                 List<string> foodProductsFromStock = File.ReadAllLines(foodStockFilePath).ToList();
-                foodProductsFromStock.Add(selectedItemText);
+                foodProductsFromStock.Add(selectedBoughtItemText);
                 File.WriteAllLines(foodStockFilePath, foodProductsFromStock);
             }
             else
             {
                 List<string> drinkProductsFromStock = File.ReadAllLines(drinkStockFilePath).ToList();
-                drinkProductsFromStock.Add(selectedItemText);
+                drinkProductsFromStock.Add(selectedBoughtItemText);
                 File.WriteAllLines(drinkStockFilePath, drinkProductsFromStock);
             }
 
-            totalClientCost -= getProductPrice(selectedItemText);
+            totalClientCost -= getProductPrice(selectedBoughtItemText);
             totalPayNumberLabel.Text = Convert.ToString(totalClientCost);
 
-            dataBinding();
+            bindProducts();
+            bindBoughtProducts();
         }
 
         private void stockProductsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -236,6 +244,7 @@ namespace CashMeInside
             boughtProductsListBox.DataSource = currentTableProducts;
 
             totalPayNumberLabel.Text = "0";
+            totalClientCost = 0;
         }
     }
 }

@@ -41,17 +41,19 @@ namespace CashMeInside
             {
                 Directory.CreateDirectory(stockFolderPath);
             }
-           
+
             string checkForDrinkFile = String.Format(@"{0}stock\drink.txt", AppDomain.CurrentDomain.BaseDirectory);
             if (!File.Exists(checkForDrinkFile))
             {
-                FileStream fs = new FileStream(checkForDrinkFile, FileMode.OpenOrCreate);
+                var drinksFile = File.Create(checkForDrinkFile);
+                drinksFile.Close();
             }
 
             string checkForFoodFile = String.Format(@"{0}stock\food.txt", AppDomain.CurrentDomain.BaseDirectory);
             if (!File.Exists(checkForFoodFile))
             {
-                FileStream fs = new FileStream(checkForFoodFile, FileMode.OpenOrCreate);
+                var foodsFile = File.Create(checkForFoodFile);
+                foodsFile.Close();
             }
 
             string tablesFolderPath = String.Format(@"{0}tables", AppDomain.CurrentDomain.BaseDirectory);
@@ -63,19 +65,22 @@ namespace CashMeInside
             string checkForTableOneFile = String.Format(@"{0}tables\table1.txt", AppDomain.CurrentDomain.BaseDirectory);
             if (!File.Exists(checkForTableOneFile))
             {
-                FileStream fs = new FileStream(checkForTableOneFile, FileMode.OpenOrCreate);
+                var tableOneFile = File.Create(checkForTableOneFile);
+                tableOneFile.Close();
             }
 
             string checkForTableTwoFile = String.Format(@"{0}tables\table2.txt", AppDomain.CurrentDomain.BaseDirectory);
             if (!File.Exists(checkForTableTwoFile))
             {
-                FileStream fs = new FileStream(checkForTableTwoFile, FileMode.OpenOrCreate);
+                var tableTwoFile = File.Create(checkForTableTwoFile);
+                tableTwoFile.Close();
             }
 
             string checkForTableThreeFile = String.Format(@"{0}tables\table3.txt", AppDomain.CurrentDomain.BaseDirectory);
             if (!File.Exists(checkForTableThreeFile))
             {
-                FileStream fs = new FileStream(checkForTableThreeFile, FileMode.OpenOrCreate);
+                var tableThreeFile = File.Create(checkForTableThreeFile);
+                tableThreeFile.Close();
             }
         }
 
